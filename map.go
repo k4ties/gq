@@ -55,7 +55,7 @@ func (m Map[K, V]) Set(key K, value V) {
 // Iterate goes through all items and lets you do something with each one.
 // Stop early by returning false from your function.
 func (m Map[K, V]) Iterate(action func(key K, value V) bool) {
-	for k, v := range maps.Clone(m) {
+	for k, v := range m {
 		if !action(k, v) {
 			return
 		}
@@ -66,7 +66,7 @@ func (m Map[K, V]) Iterate(action func(key K, value V) bool) {
 // It safely copies items first so you can take your time looping.
 func (m Map[K, V]) Iter() iter.Seq2[K, V] {
 	return func(yield func(K, V) bool) {
-		for k, v := range maps.Clone(m) {
+		for k, v := range m {
 			if !yield(k, v) {
 				return
 			}

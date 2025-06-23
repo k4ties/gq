@@ -38,10 +38,7 @@ func (s Set[T]) Delete(item T) {
 // Uses Go's new iterator pattern.
 func (s Set[T]) Iter() iter.Seq[T] {
 	return func(yield func(T) bool) {
-		// Make a copy to keep iteration safe
-		items := maps.Clone(s)
-
-		for item := range items {
+		for item := range s {
 			if !yield(item) {
 				return
 			}

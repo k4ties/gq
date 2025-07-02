@@ -46,6 +46,14 @@ func (s Set[T]) Iter() iter.Seq[T] {
 	}
 }
 
+func (s Set[T]) Iterate(f func(T) bool) {
+	for item := range s {
+		if !f(item) {
+			return
+		}
+	}
+}
+
 // Clear removes all items from the set at once.
 func (s Set[T]) Clear() {
 	for v := range s {

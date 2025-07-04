@@ -8,10 +8,6 @@ import (
 
 type Map[K comparable, V any] map[K]V
 
-func NewMap[K comparable, V any]() Map[K, V] {
-	return make(map[K]V)
-}
-
 // Len tells how many items are in the map right now.
 func (m Map[K, V]) Len() int {
 	return len(m)

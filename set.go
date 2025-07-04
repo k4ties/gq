@@ -8,14 +8,6 @@ import (
 
 type Set[T comparable] map[T]struct{}
 
-func NewSet[T comparable](items ...T) Set[T] {
-	s := make(Set[T])
-	for _, item := range items {
-		s.Add(item)
-	}
-	return s
-}
-
 // Add puts a new item in the set.
 // If item already exists, does nothing.
 func (s Set[T]) Add(item T) {

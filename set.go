@@ -56,9 +56,7 @@ func (s Set[T]) Iterate(f func(T) bool) {
 
 // Clear removes all items from the set at once.
 func (s Set[T]) Clear() {
-	for v := range s {
-		s.Delete(v)
-	}
+	clear(s)
 }
 
 // Values returns a slice of all current items in the set.

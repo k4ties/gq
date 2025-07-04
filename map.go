@@ -82,7 +82,5 @@ func (m Map[K, V]) Delete(key K) {
 
 // Clear removes all items from the map at once.
 func (m Map[K, V]) Clear() {
-	for k := range m {
-		m.Delete(k)
-	}
+	clear(m)
 }

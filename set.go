@@ -3,7 +3,6 @@ package gq
 import (
 	"iter"
 	"maps"
-	"slices"
 )
 
 type Set[T comparable] map[T]struct{}
@@ -26,18 +25,6 @@ func (s Set[T]) Delete(item T) {
 	delete(s, item)
 }
 
-// Iter lets you loop through all items in the set.
-// Uses Go's new iterator pattern.
-func (s Set[T]) Iter() iter.Seq[T] {
-	return func(yield func(T) bool) {
-		for item := range s {
-			if !yield(item) {
-				return
-			}
-		}
-	}
-}
-
 func (s Set[T]) Iterate(f func(T) bool) {
 	for item := range s {
 		if !f(item) {
@@ -51,10 +38,10 @@ func (s Set[T]) Clear() {
 	clear(s)
 }
 
-// Values returns a slice of all current items in the set.
+// Values returns an iterator of all current items in the set.
 // Order is random, like in regular Go maps.
-func (s Set[T]) Values() []T {
-	return slices.Collect(maps.Keys(s))
+func (s Set[T]) Values() iter.Seq[T] {
+	return maps.Keys(s)
 }
 
 // Len returns the number of items in the set.

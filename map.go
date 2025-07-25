@@ -3,7 +3,6 @@ package gq
 import (
 	"iter"
 	"maps"
-	"slices"
 )
 
 type Map[K comparable, V any] map[K]V
@@ -15,14 +14,14 @@ func (m Map[K, V]) Len() int {
 
 // Keys gives a list of all current keys in the map.
 // The order of keys is random, like in regular Go maps.
-func (m Map[K, V]) Keys() []K {
-	return slices.Collect(maps.Keys(m))
+func (m Map[K, V]) Keys() iter.Seq[K] {
+	return maps.Keys(m)
 }
 
 // Values gives a list of all current values in the map.
 // The order of values is random, like in regular Go maps.
-func (m Map[K, V]) Values() []V {
-	return slices.Collect(maps.Values(m))
+func (m Map[K, V]) Values() iter.Seq[V] {
+	return maps.Values(m)
 }
 
 // Put adds a new key-value pair only if the key doesn't exist yet.

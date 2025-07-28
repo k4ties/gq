@@ -30,7 +30,7 @@ func (m Map[K, V]) Put(key K, value V) bool {
 	if _, exists := m[key]; exists {
 		return false
 	}
-	m[key] = value
+	m.Set(key, value)
 	return true
 }
 
@@ -44,6 +44,10 @@ func (m Map[K, V]) Get(key K) (V, bool) {
 // Set updates or adds a key-value pair.
 // This will overwrite any existing value for the key.
 func (m Map[K, V]) Set(key K, value V) {
+	if value == nil {
+		m.Delete(key)
+		return
+	}
 	m[key] = value
 }
 

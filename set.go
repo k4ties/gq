@@ -10,6 +10,10 @@ type Set[T comparable] map[T]struct{}
 // Add puts a new item in the set.
 // If item already exists, does nothing.
 func (s Set[T]) Add(item T) {
+	if item == nil {
+		delete(s, item)
+		return
+	}
 	s[item] = struct{}{}
 }
 
